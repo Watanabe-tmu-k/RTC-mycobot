@@ -1,0 +1,54 @@
+# SendPoseDatapy CMake config file
+#
+# This file sets the following variables:
+# SendPoseDatapy_FOUND - Always TRUE.
+# SendPoseDatapy_INCLUDE_DIRS - Directories containing the SendPoseDatapy include files.
+# SendPoseDatapy_IDL_DIRS - Directories containing the SendPoseDatapy IDL files.
+# SendPoseDatapy_LIBRARIES - Libraries needed to use SendPoseDatapy.
+# SendPoseDatapy_DEFINITIONS - Compiler flags for SendPoseDatapy.
+# SendPoseDatapy_VERSION - The version of SendPoseDatapy found.
+# SendPoseDatapy_VERSION_MAJOR - The major version of SendPoseDatapy found.
+# SendPoseDatapy_VERSION_MINOR - The minor version of SendPoseDatapy found.
+# SendPoseDatapy_VERSION_REVISION - The revision version of SendPoseDatapy found.
+# SendPoseDatapy_VERSION_CANDIDATE - The candidate version of SendPoseDatapy found.
+
+message(STATUS "Found SendPoseDatapy-@PROJECT_VERSION@")
+set(SendPoseDatapy_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(SendPoseDatapy_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(SendPoseDatapy_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(SendPoseDatapy_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(SendPoseDatapy_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(SendPoseDatapy_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(SendPoseDatapy_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(SendPoseDatapy_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(SendPoseDatapy_VERSION @PROJECT_VERSION@)
+set(SendPoseDatapy_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(SendPoseDatapy_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(SendPoseDatapy_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(SendPoseDatapy_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+

@@ -1,0 +1,54 @@
+# MyCobotControllerPy CMake config file
+#
+# This file sets the following variables:
+# MyCobotControllerPy_FOUND - Always TRUE.
+# MyCobotControllerPy_INCLUDE_DIRS - Directories containing the MyCobotControllerPy include files.
+# MyCobotControllerPy_IDL_DIRS - Directories containing the MyCobotControllerPy IDL files.
+# MyCobotControllerPy_LIBRARIES - Libraries needed to use MyCobotControllerPy.
+# MyCobotControllerPy_DEFINITIONS - Compiler flags for MyCobotControllerPy.
+# MyCobotControllerPy_VERSION - The version of MyCobotControllerPy found.
+# MyCobotControllerPy_VERSION_MAJOR - The major version of MyCobotControllerPy found.
+# MyCobotControllerPy_VERSION_MINOR - The minor version of MyCobotControllerPy found.
+# MyCobotControllerPy_VERSION_REVISION - The revision version of MyCobotControllerPy found.
+# MyCobotControllerPy_VERSION_CANDIDATE - The candidate version of MyCobotControllerPy found.
+
+message(STATUS "Found MyCobotControllerPy-@PROJECT_VERSION@")
+set(MyCobotControllerPy_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(MyCobotControllerPy_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(MyCobotControllerPy_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(MyCobotControllerPy_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(MyCobotControllerPy_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(MyCobotControllerPy_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(MyCobotControllerPy_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(MyCobotControllerPy_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(MyCobotControllerPy_VERSION @PROJECT_VERSION@)
+set(MyCobotControllerPy_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(MyCobotControllerPy_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(MyCobotControllerPy_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(MyCobotControllerPy_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
